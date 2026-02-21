@@ -5,6 +5,7 @@ A modern, high-performance web dashboard for accessing legacy Flash-based Englis
 *[Also available in Spanish (README.md)](README.md)*
 
 ## Features
+
 - **Kid-Friendly UI**: Fluffy, pastel-themed interface with smooth animations and bold typography.
 - **Zero Plugin Required**: Uses the [Ruffle Emulator](https://ruffle.rs/) to play Flash files natively in modern browsers via WebAssembly.
 - **Auto-Scanning**: Automatically detects all your Flash games and documents (PDF, DOC, DOCX) through a Python manifest generator.
@@ -15,7 +16,7 @@ A modern, high-performance web dashboard for accessing legacy Flash-based Englis
 
 1. Navigate to this directory:
    ```bash
-   cd /home/blackman/Documents/Layda-English/Flash-Modernizer
+   cd Flash-Modernizer
    ```
 2. Start the application:
    ```bash
@@ -26,17 +27,19 @@ A modern, high-performance web dashboard for accessing legacy Flash-based Englis
 
 ## Adding New Courses & Folder Structure
 
-All games, resources, and documents must be placed inside the `public/assets-flash` folder. 
+All games, resources, and documents must be placed inside the `public/assets-flash` folder.
 
 The application uses a dynamic categorization system. Any folder you place directly inside `assets-flash` will automatically become a "Grade/Category" tab in the left sidebar menu (e.g., `1º Prim`, `BUGS_3`, `Dictionaries`).
 
 ### Accepted File Structure
 
 The `generate_manifest.py` script recursively scans these folders looking for:
+
 - **Interactive Flash Games**: It looks for entry point files (e.g., `Main.swf`, `index.swf`, `app.swf`, `bugs_cd3_shell.swf`, `BUGS.SWF`).
 - **Reading Materials**: It indexes any file with `.pdf`, `.doc`, or `.docx` extensions as viewable documents.
 
 **Example Structure:**
+
 ```text
 public/assets-flash/
 ├── 1º Prim/                              <-- Automatically becomes a sidebar category
@@ -53,6 +56,7 @@ public/assets-flash/
 ```
 
 ### Updating the Catalog
+
 Whenever you add, modify, or remove any file or folder from `public/assets-flash`, you **must regenerate the index database** by running:
 
 ```bash
@@ -62,6 +66,7 @@ python3 generate_manifest.py
 This will instantly update `src/manifest.json`, and the changes will be reflected in the app immediately.
 
 ## Project Architecture
+
 - `generate_manifest.py`: Python script to scan the folders and generate the catalog.
 - `src/App.jsx`: The main React dashboard and embedded players logic.
 - `vite.config.js`: Contains custom middleware to fix old case-sensitivity issues and patch empty CDATA elements in legacy XML files on-the-fly.
